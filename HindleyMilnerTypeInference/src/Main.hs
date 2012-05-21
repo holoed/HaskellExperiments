@@ -15,10 +15,10 @@ composeAst = Let("compose",
 
 t :: Type
 t = typeOf composeAst
-
+ 
 main::IO()
 main = do 
        (composeAst |> expToString
                    |> putStrLn)
        (t |> typeToString
-          |> putStrLn)
+          |> putStrLn) 

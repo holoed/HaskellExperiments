@@ -1,4 +1,3 @@
-
 module Environments where
 
 import TypeTree

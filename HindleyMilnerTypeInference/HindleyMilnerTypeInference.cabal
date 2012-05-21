@@ -1,8 +1,29 @@
 name:           HindleyMilnerTypeInference
 version:        0.1
 cabal-version:  >= 1.2
-build-type:     Simple
+build-type:     Configure
 author:         epentangelo
+
+                data-files:     src/AlphaConverter.hs, 
+                src/Ast.hs, 
+                src/Environments.hs, 
+                src/Main.hs, 
+                src/Substitutions.hs, 
+                src/TypeInfer.hs, 
+                src/TypeTree.hs, 
+                src/Unification.hs, 
+                src/Utils.hs
+data-files:     
+                src/AlphaConverter.hs, 
+                src/Ast.hs, 
+                src/Environments.hs, 
+                src/Main.hs, 
+                src/Substitutions.hs, 
+                src/TypeInfer.hs, 
+                src/TypeTree.hs, 
+                src/Unification.hs, 
+                src/Utils.hs, 
+                Setup.hs
 
 executable HindleyMilnerTypeInference
   hs-source-dirs:  src

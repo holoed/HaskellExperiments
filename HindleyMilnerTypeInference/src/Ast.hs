@@ -1,4 +1,3 @@
-
 module Ast where
 
 data Literal = Char     Char

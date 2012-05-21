@@ -1,4 +1,3 @@
-
 module TypeInfer where
 
 import Control.Monad.State 

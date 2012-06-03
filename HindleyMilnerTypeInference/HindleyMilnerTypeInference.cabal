@@ -42,5 +42,6 @@ executable HindleyMilnerTypeInference
                    TypeInfer,
                    TypeTree,
                    Unification,
-                   Utils
+                   Utils,
+                   Parser
 

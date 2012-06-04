@@ -20,7 +20,7 @@ instance Monad Parser where
 item :: Parser Char
 item = Parser (\s -> case s of 
                      "" -> []
-                     x:xs -> [(x, xs)])    
+                     x:xs -> [(x, xs)])     
                      
 zero :: Parser a
 zero = Parser (\_ -> [])                         
@@ -41,10 +41,18 @@ char c = sat (c ==)
               
 string :: String -> Parser String
 string "" = return ""
-string (c:cs) = do {char c; string cs; return (c:cs)}
+string (c:cs) = do {x <- char c; xs <- string cs; return (x:xs)}
 
 many :: Parser a -> Parser [a]
 many p = many1 p +++ return []
 
 many1 :: Parser a -> Parser [a]
-many1 p = do {x <- p; xs <- many p; return (x:xs)}                                     
+many1 p = do {x <- p; xs <- many p; return (x:xs)}    
+
+sepBy :: Parser a -> Parser a -> Parser [a]
+p `sepBy` sep = p `sepBy1` sep +++ return []
+
+sepBy1 :: Parser a -> Parser a -> Parser [a]
+p `sepBy1` sep = do x <- p
+                    xs <- many (do { _ <- sep; p });
+                    return (x:xs)                                  

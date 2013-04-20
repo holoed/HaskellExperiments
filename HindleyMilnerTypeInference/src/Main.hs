@@ -22,3 +22,7 @@ main = do
                    |> putStrLn)
        (t |> typeToString
           |> putStrLn) 
+
+-- Local Variables:
+-- compile-command: "ghc -o HindleyMilner Main.hs && ./HindleyMilner"
+-- End:

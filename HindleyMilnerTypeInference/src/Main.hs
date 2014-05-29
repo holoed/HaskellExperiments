@@ -7,9 +7,9 @@ import Utils
 
 composeAst :: Exp
 composeAst = Let("compose",
-                    Lam("f",
-                        Lam("g",
-                            Lam ("x",
+                    Lam(PVar "f",
+                        Lam(PVar "g",
+                            Lam (PVar "x",
                                 App(Var "g", App(Var "f", Var "x"))))),
                         Var "compose")
 

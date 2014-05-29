@@ -1,4 +1,4 @@
-module AlphaConverter where
+module AlphaConverter (getName, renameTVarsToLetters) where
 
 import Control.Monad.State 
 import qualified Data.Map as Map

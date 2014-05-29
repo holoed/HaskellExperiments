@@ -1,4 +1,3 @@
-
 module Substitutions where
 
 import Data.Map (Map, insert)
@@ -6,7 +5,7 @@ import TypeTree
 import qualified Data.Map as Data.Map (lookup)
 import Utils
 
-data Subst = Subst (Map String Type)
+data Subst = Subst (Map String Type) 
 
 extend :: String -> Type -> Subst -> Subst
 extend v t (Subst s) = Subst(insert v t s)

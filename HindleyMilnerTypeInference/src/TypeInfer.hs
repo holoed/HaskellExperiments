@@ -1,5 +1,6 @@
 module TypeInfer where
 
+import Control.Monad
 import Control.Monad.State 
 import TypeTree
 import Ast
@@ -53,8 +54,15 @@ tp env e bt s =
         (Lit v) -> return (mgu (litToTy v) bt s)
         (Var n) -> do if (not (containsSc n env)) then error ("Name " ++ n ++ " not found") else return ()
                       let (TyScheme (t, _)) = findSc n env 
-                      return (mgu (subs t s) bt s)                      
-        (Lam (x, e')) -> do
+                      return (mgu (subs t s) bt s)
+
+        (Tuple args) -> do
+                          tyArgs <- mapM (\_ -> newTyVar) args
+                          s1 <- foldM2 (\s' e t -> tp env e t s') s args tyArgs
+                          let s2 = mgu bt (TyCon ("Tuple", tyArgs)) s1
+                          return s2
+
+        (Lam (PVar x, e')) -> do
                           a <- newTyVar
                           b <- newTyVar
                           let s1 = mgu bt (TyLam (a, b)) s

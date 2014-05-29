@@ -14,3 +14,9 @@ fold2 _ acc [] [] = acc
 fold2 f acc (x:xs) (y:ys) = fold2 f (f acc x y) xs ys 
 fold2 _ _ (_:_) [] = error "Sequences not of same length"
 fold2 _ _  [] (_:_) = error "Sequences not of same length"
+
+foldM2 :: (Monad m) => (a -> b -> c -> m a) -> a -> [b] -> [c] -> m a
+foldM2 _ acc [] [] =  return acc
+foldM2 f acc (x:xs) (y:ys) = f acc x y >>= \faxy -> foldM2 f faxy xs ys
+foldM2 _ _ (_:_) [] = error "Sequences not of same length"
+foldM2 _ _  [] (_:_) = error "Sequences not of same length"

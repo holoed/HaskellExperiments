@@ -1,4 +1,4 @@
-module Environments where
+module Compiler.TypeInference.Environments where
 
 import TypeTree
 import Data.Set as Data (Set)

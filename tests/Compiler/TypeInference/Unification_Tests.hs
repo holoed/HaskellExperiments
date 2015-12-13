@@ -1,10 +1,10 @@
-module Unification_Tests (tests) where
+module Compiler.TypeInference.Unification_Tests (tests) where
 
-import TypeTree
-import Substitutions
-import Unification
+import Compiler.TypeInference.TypeTree
+import Compiler.TypeInference.Substitutions
+import Compiler.TypeInference.Unification
 import qualified Data.Map as Map
-import Test.HUnit 
+import Test.HUnit
 
 substToList (Subst m) = Map.toList m
 
@@ -46,7 +46,7 @@ mostGeneralUnifierTypeTest6 = TestCase $ assertAreEqual
 		expected = Subst (Map.fromList [("a", TyVar "b")])
 		actual = mgu (TyCon ("List", [TyVar "a"])) (TyCon ("List", [TyVar "b"])) (Subst (Map.empty))
 
-mostGeneralUnifierTypeTest7 = TestCase $ assertAreEqual 
+mostGeneralUnifierTypeTest7 = TestCase $ assertAreEqual
 	"Most general unifier between two container types with more than one type argument" expected actual
 	where
 		expected = Subst (Map.fromList [("a", TyVar "b"), ("c", TyVar "d")])

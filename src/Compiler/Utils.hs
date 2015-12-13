@@ -1,4 +1,4 @@
-module Utils where
+module Compiler.Utils where
 
 (|>) :: a -> (a -> b) -> b
 (|>) x f = f x
@@ -11,7 +11,7 @@ module Utils where
 
 fold2 :: (a -> b -> c -> a) -> a -> [b] -> [c] -> a
 fold2 _ acc [] [] = acc
-fold2 f acc (x:xs) (y:ys) = fold2 f (f acc x y) xs ys 
+fold2 f acc (x:xs) (y:ys) = fold2 f (f acc x y) xs ys
 fold2 _ _ (_:_) [] = error "Sequences not of same length"
 fold2 _ _  [] (_:_) = error "Sequences not of same length"
 

@@ -1,7 +1,7 @@
-module Substitutions_Tests (tests) where
+module Compiler.TypeInference.Substitutions_Tests (tests) where
 
-import TypeTree
-import Substitutions
+import Compiler.TypeInference.TypeTree
+import Compiler.TypeInference.Substitutions
 import qualified Data.Map as Map
 import Prelude hiding (lookup)
 import Test.HUnit
@@ -10,7 +10,7 @@ substToList (Subst m) = Map.toList m
 
 {-  extend Tests -}
 
-extendTest = TestCase $ assertEqual 
+extendTest = TestCase $ assertEqual
     "Should extend environment with new substitution" (substToList expected) (substToList actual)
     where
     	expected = Subst (Map.fromList ([("a", TyCon ("Int", []))]))
@@ -20,12 +20,12 @@ extendTwiceTest = TestCase $ assertEqual
 	"Should extend environment with two substitutions" (substToList expected) (substToList actual)
 	where
 		expected = Subst (Map.fromList ([("a", TyCon ("Int", [])), ("b", TyCon ("String", []))]))
-		actual = extend "b" (TyCon ("String", [])) (extend "a" (TyCon ("Int", [])) (Subst Map.empty)) 
+		actual = extend "b" (TyCon ("String", [])) (extend "a" (TyCon ("Int", [])) (Subst Map.empty))
 
 {- lookup Tests -}
 lookupTest = TestCase $ assertEqual
     "Should return new type if substitution is not found" expected actual
-    where 
+    where
     	expected = TyVar "a"
     	actual = lookup "a" (Subst Map.empty)
 

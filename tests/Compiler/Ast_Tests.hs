@@ -1,6 +1,6 @@
-module Ast_Tests (tests) where
+module Compiler.Ast_Tests (tests) where
 
-import Ast
+import Compiler.Ast
 import Test.HUnit
 
 

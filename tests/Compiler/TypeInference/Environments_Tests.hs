@@ -1,14 +1,14 @@
-module Environments_Tests (tests) where
+module Compiler.TypeInference.Environments_Tests (tests) where
 
-import Environments
-import TypeTree
+import Compiler.TypeInference.Environments
+import Compiler.TypeInference.TypeTree
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 import Test.HUnit
 
 {- getTVarsOfType Tests -}
 
-getTVarsOfTypeTest1 = TestCase $ assertEqual 
+getTVarsOfTypeTest1 = TestCase $ assertEqual
 	"Should return all type variables occurring in a type" expected actual
 	where
 		expected = Set.fromList ["a"]
@@ -22,7 +22,7 @@ getTVarsOfTypeTest2 = TestCase $ assertEqual
 
 getTVarsOfTypeTest3 = TestCase $ assertEqual
      "Should return all type variables occurring in a lambda with different types for dom and codom" expected actual
-     where 
+     where
      	expected = Set.fromList ["a", "b"]
      	actual = getTVarsOfType (TyLam (TyVar "a", TyVar "b"))
 

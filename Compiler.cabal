@@ -1,0 +1,27 @@
+name:                Compiler
+version:             0.1.0.0
+license-file:        LICENSE
+author:              Edmondo Pentangelo
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  ghc-options: -Wall
+  hs-source-dirs:      src
+  build-depends:       base,
+                       containers,
+                       transformers
+  default-language:    Haskell2010
+
+test-suite tests
+  ghc-options: -Wall -fno-warn-orphans
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  hs-source-dirs: tests, src
+  build-depends:       base,
+                       hspec,
+                       HUnit,
+                       containers,
+                       transformers,
+                       split
+  default-language:    Haskell2010

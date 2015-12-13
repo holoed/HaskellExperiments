@@ -1,37 +1,37 @@
-module AlphaConverter_Tests (tests) where
+module Compiler.TypeInference.AlphaConverter_Tests (tests) where
 
-import Control.Monad.State
+import Control.Monad.Trans.State
 import qualified Data.Map as Map
-import TypeTree
-import AlphaConverter ( getName, renameTVarsToLetters )
+import Compiler.TypeInference.TypeTree
+import Compiler.TypeInference.AlphaConverter ( getName, renameTVarsToLetters )
 import Test.HUnit
 
-stateTest m t xs = evalState m (Map.fromList xs, t) 
+stateTest m t xs = evalState m (Map.fromList xs, t)
 
 {- getName Tests -}
 
-shouldFindSymbol = TestCase $ assertEqual 
+shouldFindSymbol = TestCase $ assertEqual
   "Should get type of symbol if found" expected actual
-  	where 
+  	where
   		expected = 'a'
   		actual = stateTest (getName "x") 'a' []
 
-shouldFindSymbol2 = TestCase $ assertEqual 
+shouldFindSymbol2 = TestCase $ assertEqual
   "Should get type of symbol if found" expected actual
-  	where 
+  	where
   		expected = 'b'
   		actual = evalState (do _ <- getName "x";
   			                   x <- getName "y";
-  			                   return x) (Map.fromList [], 'a') 
+  			                   return x) (Map.fromList [], 'a')
 
-shouldFindSymbol3 = TestCase $ assertEqual 
+shouldFindSymbol3 = TestCase $ assertEqual
   "Should get type of symbol if found" expected actual
-  	where 
+  	where
   		expected = 'c'
   		actual = evalState (do _ <- getName "x";
   			                   _ <- getName "y";
   			                   x <- getName "z";
-  		                       return x) (Map.fromList [], 'a') 
+  		                       return x) (Map.fromList [], 'a')
 
 shouldReturnBaseType = TestCase $ assertEqual
 	"Should return the type passed in if the symbol is not found" expected actual
@@ -39,11 +39,11 @@ shouldReturnBaseType = TestCase $ assertEqual
 		expected = 'e'
 		actual = stateTest (getName "x") 'a' [("x", 'e')]
 
-shouldNotFindSymbol = TestCase $ assertEqual 
+shouldNotFindSymbol = TestCase $ assertEqual
   "Should get type of symbol if found" expected actual
-  	where 
+  	where
   		expected = 'b'
-  		actual = stateTest (getName "y") 'b' [("x", 'a')] 
+  		actual = stateTest (getName "y") 'b' [("x", 'a')]
 
 {- renameTVarsToLetters Tests -}
 
@@ -79,4 +79,3 @@ tests = TestList [shouldFindSymbol,
                   shouldRenameTyTuple,
                   shouldRenameTyLam,
                   shouldRenameTyCon]
-                            

@@ -19,7 +19,6 @@ test-suite tests
   main-is: Tests.hs
   hs-source-dirs: tests, src
   build-depends:       base,
-                       hspec,
                        HUnit,
                        containers,
                        transformers,

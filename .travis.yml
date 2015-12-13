@@ -1,4 +1,5 @@
 language: haskell
+sudo: false
 notifications:
   email: false
 before_script:
